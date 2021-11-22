@@ -1,0 +1,4 @@
+#!/usr/bin/qtloader6
+
+[Hello]
+class = ExtHello
