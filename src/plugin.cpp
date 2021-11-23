@@ -16,9 +16,9 @@
 **
 ****************************************************************************/
 
+#include "exthello.h"
 #include <QLoaderInterface>
 #include <QLoaderSettings>
-#include <ExtHello>
 
 class Plugin : public QObject, QLoaderInterface
 {

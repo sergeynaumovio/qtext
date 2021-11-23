@@ -19,7 +19,7 @@
 #ifndef EXTHELLO_H
 #define EXTHELLO_H
 
-#include "qtext_library.h"
+#include "qtextglobal.h"
 #include <QWidget>
 #include <QLoaderSettings>
 
