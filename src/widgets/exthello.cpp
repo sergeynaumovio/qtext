@@ -48,3 +48,9 @@ ExtHello::ExtHello(QLoaderSettings *settings, QWidget *parent)
     if (!parent)
         show();
 }
+
+void ExtHello::closeEvent(QCloseEvent*)
+{
+    hide();
+    deleteLater();
+}

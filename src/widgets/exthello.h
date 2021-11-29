@@ -28,6 +28,9 @@ class Q_EXT_EXPORT ExtHello : public QWidget, public QLoaderSettings
     Q_OBJECT
     Q_INTERFACES(QLoaderSettings)
 
+protected:
+    void closeEvent(QCloseEvent*) override;
+
 public:
     ExtHello(QLoaderSettings *settings, QWidget *parent);
 };
