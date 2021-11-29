@@ -29,10 +29,16 @@ class Plugin : public QObject, QLoaderInterface
 public:
     QObject *object(QLoaderSettings *settings, QObject *parent) override
     {
-        QWidget *widget = qobject_cast<QWidget*>(parent);
         const char *className = settings->className();
-        if (((parent && widget) || !parent) && !qstrcmp(className, "ExtHello"))
-            return new ExtHello(settings, widget);
+
+        if (!qstrcmp(className, "ExtHello"))
+        {
+            QWidget *widget = qobject_cast<QWidget*>(parent);
+            if (!parent  || (parent && widget))
+                return new ExtHello(settings, widget);
+
+            return parent;
+        }
 
         return nullptr;
     }
