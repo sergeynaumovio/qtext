@@ -2,3 +2,4 @@
 
 [Hello]
 class = ExtHello
+text = Hello Qt !

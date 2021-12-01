@@ -26,7 +26,7 @@ ExtHello::ExtHello(QLoaderSettings *settings, QWidget *parent)
     QLoaderSettings(settings)
 {
     QLabel *hello = new QLabel(this);
-    hello->setText("Hello Qt !");
+    hello->setText(value("text", "Hello World!").toString());
     QFont font("Arial", 20, QFont::Bold);
     hello->setFont(font);
     hello->setAlignment(Qt::AlignCenter);
