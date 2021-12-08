@@ -1,5 +1,0 @@
-#!/usr/bin/qtloader5
-
-[Hello]
-class = ExtHello
-text = Hello Qt !
