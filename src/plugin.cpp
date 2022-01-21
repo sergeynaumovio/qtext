@@ -17,14 +17,14 @@
 ****************************************************************************/
 
 #include "exthello.h"
-#include <QLoaderInterface>
+#include <QLoaderPluginInterface>
 #include <QLoaderSettings>
 
-class Plugin : public QObject, QLoaderInterface
+class Plugin : public QObject, QLoaderPluginInterface
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "QtExt")
-    Q_INTERFACES(QLoaderInterface)
+    Q_INTERFACES(QLoaderPluginInterface)
 
 public:
     QObject *object(QLoaderSettings *settings, QObject *parent) override
