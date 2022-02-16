@@ -19,6 +19,7 @@
 #include "exthello.h"
 #include <QLoaderPluginInterface>
 #include <QLoaderSettings>
+#include <QLoaderTree>
 
 class Plugin : public QObject, QLoaderPluginInterface
 {
@@ -29,9 +30,10 @@ class Plugin : public QObject, QLoaderPluginInterface
 public:
     QObject *object(QLoaderSettings *settings, QObject *parent) override
     {
-        const char *className = settings->className();
+        QByteArray className = settings->className();
+        const char *shortName = className.data() + qstrlen("Ext");
 
-        if (!qstrcmp(className, "ExtHello"))
+        if (!qstrcmp(shortName, "Hello"))
         {
             QWidget *widget = qobject_cast<QWidget*>(parent);
             if (!parent  || (parent && widget))
@@ -40,7 +42,7 @@ public:
             return parent;
         }
 
-        return nullptr;
+        return settings->tree();
     }
 };
 
