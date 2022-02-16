@@ -20,11 +20,16 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QVBoxLayout>
+#include <QMainWindow>
 
 ExtHello::ExtHello(QLoaderSettings *settings, QWidget *parent)
 :   QWidget(parent),
     QLoaderSettings(settings)
 {
+    QMainWindow *window = qobject_cast<QMainWindow*>(parent);
+    if (window)
+        window->setCentralWidget(this);
+
     QLabel *hello = new QLabel(this);
     hello->setText(value("text", "Hello World!").toString());
     QFont font("Arial", 20, QFont::Bold);
