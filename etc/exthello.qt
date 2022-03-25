@@ -2,4 +2,12 @@
 
 [Hello]
 class = ExtHello
+image = QLoaderDataBlobUuid(5512060F-1E01-4E5F-81CB-68033BA88BC1)
 text = Hello Qt !
+
+[Hello/Data]
+class = LoaderData
+
+[Hello/Data/Blob]
+class = LoaderDataBlob
+5512060F-1E01-4E5F-81CB-68033BA88BC1 = QByteArray(multiline binary)
