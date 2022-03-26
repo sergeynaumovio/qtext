@@ -8,6 +8,9 @@ text = Hello Qt !
 [Hello/Data]
 class = LoaderData
 
-[Hello/Data/Storage]
+[Hello/Data/NewDir]
+class = LoaderDataDir
+
+[Hello/Storage]
 class = LoaderStorage
 5512060F-1E01-4E5F-81CB-68033BA88BC1 = QLoaderBlob(multiline binary)
