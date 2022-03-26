@@ -9,7 +9,7 @@ text = Hello Qt !
 class = LoaderData
 
 [Hello/Data/NewDir]
-class = LoaderDataDir
+class = LoaderDir
 
 [Hello/Storage]
 class = LoaderStorage
