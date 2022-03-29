@@ -6,11 +6,11 @@ image = QLoaderBlob(5512060F-1E01-4E5F-81CB-68033BA88BC1)
 text = Hello Qt !
 
 [Hello/Data]
-class = LoaderData
+class = QLoaderData
 
 [Hello/Data/NewDir]
-class = LoaderDir
+class = QLoaderDir
 
 [Hello/Storage]
-class = LoaderStorage
+class = QLoaderStorage
 5512060F-1E01-4E5F-81CB-68033BA88BC1 = QLoaderBlob(multiline binary)
