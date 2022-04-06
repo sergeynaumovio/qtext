@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2021 Sergey Naumov
+** Copyright (C) 2021, 2022 Sergey Naumov
 **
 ** Permission to use, copy, modify, and/or distribute this
 ** software for any purpose with or without fee is hereby granted.
@@ -23,15 +23,21 @@
 #include <QWidget>
 #include <QLoaderSettings>
 
+class ExtHelloPrivate;
+
 class Q_EXT_EXPORT ExtHello : public QWidget, public QLoaderSettings
 {
     Q_OBJECT
 
+    const QScopedPointer<ExtHelloPrivate> d_ptr;
+
 protected:
     void closeEvent(QCloseEvent*) override;
+    QLoaderBlob saveBlob(const QString &key) const override;
 
 public:
     ExtHello(QLoaderSettings *settings, QWidget *parent);
+    ~ExtHello();
 };
 
 #endif // EXTHELLO_H

@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2021 Sergey Naumov
+** Copyright (C) 2021, 2022 Sergey Naumov
 **
 ** Permission to use, copy, modify, and/or distribute this
 ** software for any purpose with or without fee is hereby granted.
@@ -21,10 +21,18 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QMainWindow>
+#include <QDataStream>
+
+class ExtHelloPrivate
+{
+public:
+    bool imageChanged{};
+};
 
 ExtHello::ExtHello(QLoaderSettings *settings, QWidget *parent)
 :   QWidget(parent),
-    QLoaderSettings(settings)
+    QLoaderSettings(settings),
+    d_ptr(new ExtHelloPrivate)
 {
     QMainWindow *window = qobject_cast<QMainWindow*>(parent);
     if (window)
@@ -54,8 +62,29 @@ ExtHello::ExtHello(QLoaderSettings *settings, QWidget *parent)
         show();
 }
 
+ExtHello::~ExtHello()
+{ }
+
 void ExtHello::closeEvent(QCloseEvent*)
 {
     hide();
     deleteLater();
+}
+
+QLoaderBlob ExtHello::saveBlob(const QString &key) const
+{
+    if (key == "image")
+    {
+        if (d_ptr->imageChanged)
+        {
+            QByteArray ba;
+            QDataStream out(&ba, QIODevice::WriteOnly);
+            out << QByteArray("multiline binary");
+
+            return ba;
+        }
+        return {};
+    }
+
+    return {};
 }
