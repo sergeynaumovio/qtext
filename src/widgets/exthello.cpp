@@ -70,10 +70,13 @@ ExtHello::ExtHello(QLoaderSettings *settings, QWidget *parent)
         layout->addWidget(button, 1, Qt::AlignRight);
     }
 
-    QShortcut *shortcut = new QShortcut(this);
+    if (contains("saveShortcut") == Value)
     {
-        shortcut->setKey(QKeySequence(value("saveShortcut").toString()));
-        QObject::connect(shortcut, &QShortcut::activated, this, [this] { tree()->save(); });
+        QShortcut *shortcut = new QShortcut(this);
+        {
+            shortcut->setKey(QKeySequence(value("saveShortcut").toString()));
+            QObject::connect(shortcut, &QShortcut::activated, this, [this] { tree()->save(); });
+        }
     }
 
     if (!parent)
