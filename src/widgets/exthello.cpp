@@ -22,6 +22,8 @@
 #include <QVBoxLayout>
 #include <QMainWindow>
 #include <QDataStream>
+#include <QShortcut>
+#include <QLoaderTree>
 
 class ExtHelloPrivate
 {
@@ -35,31 +37,49 @@ ExtHello::ExtHello(QLoaderSettings *settings, QWidget *parent)
     d_ptr(new ExtHelloPrivate)
 {
     QMainWindow *window = qobject_cast<QMainWindow*>(parent);
-    if (window)
-        window->setCentralWidget(this);
+    {
+        if (window)
+            window->setCentralWidget(this);
+    }
 
-    QLabel *hello = new QLabel(this);
-    hello->setText(value("text", "Hello World!").toString());
     QFont font("Arial", 20, QFont::Bold);
-    hello->setFont(font);
-    hello->setAlignment(Qt::AlignCenter);
+    QLabel *hello = new QLabel(this);
+    {
+        hello->setText(value("text", "Hello World!").toString());
+        hello->setFont(font);
+        hello->setAlignment(Qt::AlignCenter);
+    }
 
     QLabel *ext = new QLabel(this);
-    ext->setText("\u263A");
-    font.setPointSize(60);
-    ext->setFont(font);
-    ext->setAlignment(Qt::AlignCenter);
+    {
+        font.setPointSize(60);
+        ext->setText("\u263A");
+        ext->setFont(font);
+        ext->setAlignment(Qt::AlignCenter);
+    }
 
     QPushButton *button = new QPushButton("Close", this);
-    connect(button, &QPushButton::clicked, this, [this] { close(); });
+    {
+        connect(button, &QPushButton::clicked, this, [this] { close(); });
+    }
 
     QVBoxLayout *layout = new QVBoxLayout(this);
-    layout->addWidget(hello);
-    layout->addWidget(ext);
-    layout->addWidget(button, 1, Qt::AlignRight);
+    {
+        layout->addWidget(hello);
+        layout->addWidget(ext);
+        layout->addWidget(button, 1, Qt::AlignRight);
+    }
+
+    QShortcut *shortcut = new QShortcut(this);
+    {
+        shortcut->setKey(QKeySequence(value("saveShortcut").toString()));
+        QObject::connect(shortcut, &QShortcut::activated, this, [this] { tree()->save(); });
+    }
 
     if (!parent)
         show();
+
+    connect(tree(), &QLoaderTree::loaded, this, [this] { dumpSettingsTree(); });
 }
 
 ExtHello::~ExtHello()

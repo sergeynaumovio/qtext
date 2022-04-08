@@ -3,6 +3,7 @@
 [Hello]
 class = ExtHello
 image = QLoaderBlob(5512060F-1E01-4E5F-81CB-68033BA88BC1)
+saveShortcut = Ctrl+S
 text = Hello Qt !
 
 [Hello/Data]
