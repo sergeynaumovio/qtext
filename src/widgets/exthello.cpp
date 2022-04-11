@@ -100,11 +100,12 @@ QLoaderBlob ExtHello::saveBlob(const QString &key) const
     {
         if (d_ptr->imageChanged)
         {
-            QByteArray ba;
-            QDataStream out(&ba, QIODevice::WriteOnly);
+            QLoaderBlob bo;
+            QDataStream out(&bo.array, QIODevice::WriteOnly);
+            out.setVersion(bo.version);
             out << QByteArray("multiline binary");
 
-            return ba;
+            return bo;
         }
         return {};
     }
