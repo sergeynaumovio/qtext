@@ -5,8 +5,8 @@
 #define EXTHELLO_H
 
 #include "qtextglobal.h"
-#include <QWidget>
 #include <QLoaderSettings>
+#include <QWidget>
 
 class ExtHelloPrivate;
 

@@ -2,13 +2,13 @@
 // SPDX-License-Identifier: 0BSD
 
 #include "exthello.h"
-#include <QLabel>
-#include <QPushButton>
-#include <QVBoxLayout>
-#include <QMainWindow>
 #include <QDataStream>
-#include <QShortcut>
+#include <QLabel>
 #include <QLoaderTree>
+#include <QMainWindow>
+#include <QPushButton>
+#include <QShortcut>
+#include <QVBoxLayout>
 
 class ExtHelloPrivate
 {
