@@ -31,10 +31,10 @@ set(QT_EXT_LIBRARY Qt${QT_VERSION_MAJOR}Ext)
 add_library(${QT_EXT_LIBRARY} SHARED)
 
 target_sources(${QT_EXT_LIBRARY}
-    PRIVATE src/plugin.cpp
-            src/core/qtextglobal.h
-            src/widgets/exthello.h
+    PRIVATE src/core/qtextglobal.h
             src/widgets/exthello.cpp
+            src/widgets/exthello.h
+            src/plugin.cpp
 )
 
 target_include_directories(${QT_EXT_LIBRARY}
