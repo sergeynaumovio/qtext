@@ -10,16 +10,15 @@
 #include <QShortcut>
 #include <QVBoxLayout>
 
-class ExtHelloPrivate
+void ExtHello::closeEvent(QCloseEvent*)
 {
-public:
-    bool imageChanged{};
-};
+    hide();
+    deleteLater();
+}
 
 ExtHello::ExtHello(QLoaderSettings *settings, QWidget *parent)
 :   QWidget(parent),
-    QLoaderSettings(settings),
-    d_ptr(new ExtHelloPrivate)
+    QLoaderSettings(settings)
 {
     QMainWindow *window = qobject_cast<QMainWindow*>(parent);
     {
@@ -55,45 +54,8 @@ ExtHello::ExtHello(QLoaderSettings *settings, QWidget *parent)
         layout->addWidget(button, 1, Qt::AlignRight);
     }
 
-    if (contains("saveShortcut") == Value)
-    {
-        QShortcut *shortcut = new QShortcut(this);
-        {
-            shortcut->setKey(QKeySequence(value("saveShortcut").toString()));
-            QObject::connect(shortcut, &QShortcut::activated, this, [this] { tree()->save(); });
-        }
-    }
-
     if (!parent)
         show();
 
     connect(tree(), &QLoaderTree::loaded, this, [this] { dumpSettingsTree(); });
-}
-
-ExtHello::~ExtHello()
-{ }
-
-void ExtHello::closeEvent(QCloseEvent*)
-{
-    hide();
-    deleteLater();
-}
-
-QLoaderBlob ExtHello::saveBlob(const QString &key) const
-{
-    if (key == "image")
-    {
-        if (d_ptr->imageChanged)
-        {
-            QLoaderBlob bo;
-            QDataStream out(&bo.array, QIODevice::WriteOnly);
-            out.setVersion(bo.version);
-            out << QByteArray("multiline binary");
-
-            return bo;
-        }
-        return {};
-    }
-
-    return {};
 }
