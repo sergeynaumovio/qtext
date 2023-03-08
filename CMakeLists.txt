@@ -25,7 +25,7 @@ if(NOT APPLE)
 endif()
 
 # QT_EXT_LIBRARY ---------------------------------------------------------------
-include("cmake/QtExtVersion.in")
+include("cmake/QtExtConfigVersion.in")
 set(QT_EXT_LIBRARY Qt${QT_VERSION_MAJOR}Ext)
 
 add_library(${QT_EXT_LIBRARY} SHARED)
@@ -92,13 +92,13 @@ configure_package_config_file(
     PATH_VARS CMAKE_INSTALL_LIBDIR CMAKE_INSTALL_INCLUDEDIR
 )
 write_basic_package_version_file(
-    ${CMAKE_CURRENT_BINARY_DIR}/${QT_EXT_LIBRARY}Version.cmake
+    ${CMAKE_CURRENT_BINARY_DIR}/${QT_EXT_LIBRARY}ConfigVersion.cmake
     VERSION ${QT_EXT_VERSION}
     COMPATIBILITY SameMajorVersion
 )
 
 install(
     FILES "${CMAKE_CURRENT_BINARY_DIR}/${QT_EXT_LIBRARY}Config.cmake"
-          "${CMAKE_CURRENT_BINARY_DIR}/${QT_EXT_LIBRARY}Version.cmake"
+          "${CMAKE_CURRENT_BINARY_DIR}/${QT_EXT_LIBRARY}ConfigVersion.cmake"
           DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${QT_EXT_LIBRARY}"
 )
