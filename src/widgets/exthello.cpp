@@ -10,7 +10,7 @@
 #include <QShortcut>
 #include <QVBoxLayout>
 
-void ExtHello::closeEvent(QCloseEvent*)
+void ExtHello::closeEvent(QCloseEvent *)
 {
     hide();
     deleteLater();
@@ -18,9 +18,9 @@ void ExtHello::closeEvent(QCloseEvent*)
 
 ExtHello::ExtHello(QLoaderSettings *settings, QWidget *parent)
 :   QWidget(parent),
-    QLoaderSettings(settings)
+    QLoaderSettings(this, settings)
 {
-    QMainWindow *window = qobject_cast<QMainWindow*>(parent);
+    QMainWindow *window = qobject_cast<QMainWindow *>(parent);
     {
         if (window)
             window->setCentralWidget(this);
