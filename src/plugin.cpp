@@ -13,7 +13,7 @@ class Plugin : public QObject, QLoaderPluginInterface
     Q_INTERFACES(QLoaderPluginInterface)
 
 public:
-    QObject *object(QLoaderSettings *settings, QObject *parent) override
+    QObject *object(QLoaderSettings *settings, QObject *parent) const override
     {
         QByteArray className = settings->className();
         const char *shortName = className.data() + qstrlen("Ext");
