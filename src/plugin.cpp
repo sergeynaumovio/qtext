@@ -1,4 +1,4 @@
-// Copyright (C) 2023 Sergey Naumov <sergey@naumov.io>
+// Copyright (C) 2025 Sergey Naumov <sergey@naumov.io>
 // SPDX-License-Identifier: 0BSD
 
 #include "exthello.h"
@@ -15,10 +15,9 @@ class Plugin : public QObject, QLoaderPluginInterface
 public:
     QObject *object(QLoaderSettings *settings, QObject *parent) const override
     {
-        QByteArray className = settings->className();
-        const char *shortName = className.data() + qstrlen("Ext");
+        const char *shortName = settings->className() + std::char_traits<char>::length("Ext");
 
-        if (!qstrcmp(shortName, "Hello"))
+        if (!strcmp(shortName, "Hello"))
         {
             QWidget *widget = qobject_cast<QWidget*>(parent);
             if (!parent  || (parent && widget))
