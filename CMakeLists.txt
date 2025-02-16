@@ -1,10 +1,13 @@
+# Copyright (C) 2025 Sergey Naumov <sergey@naumov.io>
+# SPDX-License-Identifier: 0BSD
+
 cmake_minimum_required(VERSION 3.15)
 
 project(QtExt LANGUAGES CXX)
 
 if(MSVC)
     cmake_policy(SET CMP0092 NEW) # Disable passing /W3 by default on MSVC
-    add_compile_options(/W4 /WX /wd4127)
+    add_compile_options(/W4 /WX)
 else()
     add_compile_options(-Wall -Wextra -pedantic -Werror)
 endif()
@@ -16,8 +19,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 set(CMAKE_VISIBILITY_INLINES_HIDDEN YES)
 
-find_package(QT NAMES Qt6 COMPONENTS Widgets REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
+find_package(QT NAMES Qt6)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR}Loader)
 
 if(NOT APPLE)
@@ -56,6 +59,7 @@ set_target_properties(${QT_EXT_LIBRARY} PROPERTIES
 )
 
 target_link_libraries(${QT_EXT_LIBRARY}
+    PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
     PRIVATE Qt${QT_VERSION_MAJOR}Loader
 )
 
